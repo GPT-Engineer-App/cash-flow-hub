@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Box, Heading, Text, VStack, HStack, Button, Input, Image, Link } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
-import { FaUser, FaMoneyBillWave, FaHistory } from "react-icons/fa";
+import { FaUser, FaMoneyBillWave, FaHistory, FaCog } from "react-icons/fa";
 
 const Index = () => {
   const [balance, setBalance] = useState(1000);
   const [amount, setAmount] = useState("");
   const [history, setHistory] = useState([]);
+  const [email, setEmail] = useState("");
 
   const handleDeposit = () => {
     const depositAmount = parseInt(amount);
@@ -59,6 +60,14 @@ const Index = () => {
             <Button colorScheme="blue">International Transfer</Button>
           </Link>
         </Box>
+        <HStack>
+          <Input placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <Link as={RouterLink} to="/settings">
+            <Button leftIcon={<FaCog />} colorScheme="gray">
+              Email Settings
+            </Button>
+          </Link>
+        </HStack>
         <Box>
           <HStack>
             <FaHistory size={24} />
