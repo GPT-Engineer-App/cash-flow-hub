@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Box, Heading, Text, VStack, HStack, Button, Input, Image } from "@chakra-ui/react";
+import { Box, Heading, Text, VStack, HStack, Button, Input, Image, Link } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 import { FaUser, FaMoneyBillWave, FaHistory } from "react-icons/fa";
 
 const Index = () => {
@@ -53,6 +54,11 @@ const Index = () => {
             Withdraw
           </Button>
         </HStack>
+        <Box mb={4}>
+          <Link as={RouterLink} to="/international-transfer">
+            <Button colorScheme="blue">International Transfer</Button>
+          </Link>
+        </Box>
         <Box>
           <HStack>
             <FaHistory size={24} />
@@ -62,7 +68,7 @@ const Index = () => {
             {history.map((transaction, index) => (
               <Box key={index} bg={transaction.type === "deposit" ? "green.50" : "red.50"} p={2} borderRadius="md">
                 <Text>
-                  {transaction.type === "deposit" ? "Deposit" : "Withdraw"}: ${transaction.amount}
+                  {transaction.type === "deposit" ? "Deposit" : transaction.type === "withdraw" ? "Withdraw" : "International Transfer"}: ${transaction.amount}
                 </Text>
               </Box>
             ))}
